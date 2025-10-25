@@ -1,29 +1,49 @@
-import { Provider } from 'react-redux'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import store from './store'
-import LoginPage from './LoginPage'
-import Dashboard from './Dashboard'
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { LoginProvider, useLogin } from "./LoginContext";
+import LoginPage from "./LoginPage";
+import Dashboard from "./Dashboard";
+import UserDetails from "./UserDetails";
 
-function App() {
-  const [count, setCount] = useState(0)
+// ✅ شيل QueryClient من هنا لأنه موجود في main.jsx
 
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-  )
+function PrivateRoute({ children }) {
+  const { isLoggedIn } = useLogin();
+  return isLoggedIn ? children : <Navigate to="/" />;
 }
 
-export default App
+function App() {
+  return (
+    // ✅ بس LoginProvider - QueryClientProvider موجود في main.jsx
+    <LoginProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/users/:id"
+            element={
+              <PrivateRoute>
+                <UserDetails />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </LoginProvider>
+  );
+}
 
-
+export default App;
