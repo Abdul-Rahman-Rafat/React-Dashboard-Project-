@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_KEY = "b6907d289e10d714a6e88b30761fae22"; // مفتاح تجريبي من openweathermap
+const API_KEY = "b6907d289e10d714a6e88b30761fae22"; 
 
 export default function WeatherCard() {
   const [city, setCity] = useState("");
@@ -29,31 +29,31 @@ export default function WeatherCard() {
   };
 
   return (
-    <div className="bg-white rounded shadow p-4 card">
-      <h2 className="text-xl font-bold mb-2">الطقس</h2>
-      <div className="flex gap-2 mb-3">
+    <div className="weather-card card">
+      <h2 className="header-txt">Weather Panel</h2>
+      <div className="search-bar">
         <input
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          placeholder="أدخل اسم المدينة"
-          className="border p-2 rounded w-full"
+          placeholder="Enter city name"
+          className="input-city"
         />
         <button
           onClick={fetchWeather}
-          className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600"
+          className="btn btn-search"
         >
           بحث
         </button>
       </div>
-      {loading && <div>جاري جلب الطقس...</div>}
-      {error && <div className="text-red-500">{error}</div>}
+      {loading && <div> Loading...</div>}
+      {error && <div className="error error-msg ">{error}</div>}
       {weather && (
-        <div>
-          <div className="text-lg font-bold">{weather.name}</div>
-          <div>درجة الحرارة: {weather.main.temp}°C</div>
-          <div>الوصف: {weather.weather[0].description}</div>
-          <div>الرطوبة: {weather.main.humidity}%</div>
+        <div className="weather-info">
+          <div className="weather-name">{weather.name}</div>
+          <div> Temp :{weather.main.temp}°C</div>
+          <div>description :{weather.weather[0].description}</div>
+          <div>Humidity :{weather.main.humidity}%</div>
           <img
             src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
             alt="weather icon"

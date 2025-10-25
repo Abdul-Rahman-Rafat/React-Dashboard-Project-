@@ -5,14 +5,13 @@ const LoginContext = createContext();
 export const useLogin = () => useContext(LoginContext);
 
 export const LoginProvider = ({ children }) => {
-  // ✅ التحقق الصحيح من localStorage
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem("isLoggedIn") === "true";
   });
 
   const login = () => {
     setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", "true"); // ✅ حفظ كـ string
+    localStorage.setItem("isLoggedIn", "true"); 
   };
 
   const logout = () => {

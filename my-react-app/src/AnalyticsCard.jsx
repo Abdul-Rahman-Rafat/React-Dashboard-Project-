@@ -9,7 +9,6 @@ const fetchTodos = async () =>
   fetch("https://jsonplaceholder.typicode.com/todos").then((res) => res.json());
 
 export default function AnalyticsCard() {
-  // ✅ الطريقة الصحيحة لـ React Query v5
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
@@ -26,9 +25,8 @@ export default function AnalyticsCard() {
   });
 
   if (!users || !posts || !todos)
-    return <div className="card">جاري التحميل...</div>;
+    return <div className="loading">Loading...</div>;
 
-  // حسابات التحليلات المطلوبة
   const postsPerUser = users.map((u) => ({
     id: u.id,
     username: u.username,
@@ -52,13 +50,13 @@ export default function AnalyticsCard() {
   );
 
   return (
-    <div className="bg-white rounded shadow p-4 card">
-      <h2 className="text-xl font-bold mb-2">تحليلات بسيطة</h2>
-      <div className="mb-2">عدد المستخدمين: <span className="font-bold">{users.length}</span></div>
-      <div className="mb-2">أكثر مستخدم منشورات: <span className="font-bold">{mostPosts.username}</span> ({mostPosts.posts})</div>
-      <div className="mb-2">أقل مستخدم منشورات: <span className="font-bold">{fewestPosts.username}</span> ({fewestPosts.posts})</div>
-      <div className="mb-2">أكثر مستخدم مهام منتهية: <span className="font-bold">{mostCompletedTodos.username}</span> ({mostCompletedTodos.completedTodos})</div>
-      <div className="mb-2">أقل مستخدم مهام منتهية: <span className="font-bold">{fewestCompletedTodos.username}</span> ({fewestCompletedTodos.completedTodos})</div>
+    <div className="analytics-card card">
+      <h2 className="header-analytics">Analytics</h2>
+      <div className="more"> Number Of Users <span className="font-style">{users.length}</span></div>
+      <div className="more">Most User Post<span className="font-style">{mostPosts.username}</span> ({mostPosts.posts})</div>
+      <div className="more">Less User Post <span className="font-style">{fewestPosts.username}</span> ({fewestPosts.posts})</div>
+      <div className="more"> Most user Completed Todos <span className="font-style">{mostCompletedTodos.username}</span> ({mostCompletedTodos.completedTodos})</div>
+      <div className="more">Less user Completed Todos <span className="font-style">{fewestCompletedTodos.username}</span> ({fewestCompletedTodos.completedTodos})</div>
     </div>
   );
 }

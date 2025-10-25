@@ -10,7 +10,7 @@ import LoginPage from "./LoginPage";
 import Dashboard from "./Dashboard";
 import UserDetails from "./UserDetails";
 
-// ✅ شيل QueryClient من هنا لأنه موجود في main.jsx
+
 
 function PrivateRoute({ children }) {
   const { isLoggedIn } = useLogin();
@@ -19,7 +19,7 @@ function PrivateRoute({ children }) {
 
 function App() {
   return (
-    // ✅ بس LoginProvider - QueryClientProvider موجود في main.jsx
+  
     <LoginProvider>
       <Router>
         <Routes>

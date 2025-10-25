@@ -16,17 +16,17 @@ export default function UsersManager() {
 
   const navigate = useNavigate();
 
-  if (isLoading) return <div className="card">جاري تحميل المستخدمين...</div>;
-  if (error) return <div className="card text-red-500">حدث خطأ أثناء تحميل المستخدمين!</div>;
+  if (isLoading) return <div className="card">Loading...</div>;
+  if (error) return <div className="card text-red-500">Error while fetching data</div>;
 
   return (
-    <div className="bg-white rounded shadow p-4 card">
-      <h2 className="text-xl font-bold mb-2">المستخدمين</h2>
+    <div className="users-manager card">
+      <h2 className="header-users">Users</h2>
       <ul>
         {users.map((user) => (
           <li
             key={user.id}
-            className="cursor-pointer hover:bg-blue-100 p-2 rounded"
+            className="li-user"
             onClick={() => navigate(`/users/${user.id}`)}
           >
             {user.name}

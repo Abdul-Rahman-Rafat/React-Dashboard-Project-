@@ -11,44 +11,44 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin123") {
+    if (username === "abdo" && password === "123") {
       login();
       console.log("navigating to /dashboard");
       navigate("/dashboard");
     } else {
-      setErrorMsg("بيانات الدخول غير صحيحة!");
+      setErrorMsg("Invalid username or password");
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="login-page">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow w-full max-w-sm"
+        className="form-container"
       >
-        <h2 className="text-2xl mb-4 text-center font-bold">تسجيل الدخول</h2>
+        <h2 className="text-signin"> Sign in</h2>
         <input
           type="text"
-          placeholder="اسم المستخدم"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full mb-3 p-2 border rounded"
+          className="input input-username"
         />
         <input
           type="password"
-          placeholder="كلمة المرور"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-3 p-2 border rounded"
+          className="input input-password "
         />
         {errorMsg && (
-          <div className="mb-3 text-red-500 text-center">{errorMsg}</div>
+          <div className="error error-msg">{errorMsg}</div>
         )}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="btn btn-signin"
         >
-          دخول
+          Sign in
         </button>
       </form>
     </div>

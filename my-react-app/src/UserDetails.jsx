@@ -58,40 +58,40 @@ export default function UserDetails() {
   };
 
   if (userLoading || postsLoading || todosLoading)
-    return <div className="card">جاري تحميل بيانات المستخدم...</div>;
+    return <div className="card">Loading...</div>;
 
   if (userError || postsError || todosError)
-    return <div className="card text-red-500">حدث خطأ أثناء تحميل البيانات!</div>;
+    return <div className="error-load">Error while fetching data</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="bg-white rounded shadow p-6 max-w-2xl mx-auto">
-        <h2 className="text-2xl font-bold mb-2">{user.name}</h2>
-        <div className="mb-4">
-          <span className="font-semibold">الإيميل:</span> {user.email}
+    <div className="user-details-container">
+      <div className="user-card">
+        <h2 className="header-name">{user.name}</h2>
+        <div className="detail-item">
+          <span className="email-label">E-mail :</span> {user.email}
         </div>
-        <div className="mb-6">
-          <h3 className="text-xl font-bold mb-2">المنشورات</h3>
-          <ul className="list-disc pl-5">
+        <div className="posts-section">
+          <h3 className="header-post">Posts</h3>
+          <ul className="list-posts">
             {posts?.map((post) => (
               <li key={post.id}>
-                <span className="font-bold">{post.title}</span>
-                <div className="text-sm text-gray-600">{post.body}</div>
+                <span className="title-post">{post.title}</span>
+                <div className="body-post">{post.body}</div>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3 className="text-xl font-bold mb-2">المهام (To-dos)</h3>
+          <h3 className="header-task">Todos list (To-dos)</h3>
           <ul>
             {todos?.map((todo) => (
               <li
                 key={todo.id}
                 onClick={() => toggleTodo(todo.id)}
-                className={`cursor-pointer mb-2 p-2 rounded ${
+                className={`li-class ${
                   todoState[todo.id]
-                    ? "bg-green-100 line-through text-green-700"
-                    : "bg-gray-100"
+                    ? "green-bg-class"
+                    : "gray-bg-class"
                 }`}
               >
                 {todo.title}
