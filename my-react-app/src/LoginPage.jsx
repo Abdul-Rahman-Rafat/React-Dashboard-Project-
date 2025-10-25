@@ -21,7 +21,14 @@ export default function LoginPage() {
   };
 
   return (
+
+
+
     <div className="login-page">
+          <header className="ProjectName">
+        <h1 className="text-ProjectName"> Weather Dashboard </h1>
+          </header>
+
       <form
         onSubmit={handleSubmit}
         className="form-container"
