@@ -11,7 +11,7 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === "abdo" && password === "123") {
+    if ((username === "abdo" || username === "admin")  && password === "123" || password === "admin123") {
       login();
       console.log("navigating to /dashboard");
       navigate("/dashboard");
