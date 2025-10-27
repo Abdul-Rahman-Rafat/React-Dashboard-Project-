@@ -326,7 +326,25 @@ body {
 
 .notes-list {
   margin-top: 20px;
+  max-height: 300px; /* 👈 الطول الأقصى للكارت */
+  overflow-y: auto;  /* 👈 علشان يبقى scrollable */
+  padding-right: 10px; /* علشان نسيب مساحة للـ scrollbar */
 }
+
+/* تحسين شكل الـ scrollbar داخل النوتس فقط */
+.notes-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.notes-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notes-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+}
+
 
 .notes-list > div {
   margin-bottom: 25px;

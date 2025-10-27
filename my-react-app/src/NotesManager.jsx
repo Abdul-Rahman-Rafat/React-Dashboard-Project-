@@ -7,14 +7,23 @@ export default function NotesManager() {
   const [priority, setPriority] = useState(priorities[1]);
   const [notes, setNotes] = useState([]);
 
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("notes")) || [];
-    setNotes(saved);
-  }, []);
 
-  useEffect(() => {
+
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+
+useEffect(() => {
+  const saved = JSON.parse(localStorage.getItem("notes")) || [];
+  setNotes(saved);
+  setIsInitialLoad(false);
+}, []);
+
+useEffect(() => {
+  if (!isInitialLoad) {
     localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
+  }
+}, [notes, isInitialLoad]);
+
+
 
   const addNote = () => {
     if (!note) return;
